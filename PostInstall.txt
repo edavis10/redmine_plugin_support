@@ -1,0 +1,7 @@
+
+For more information on redmine_plugin_support, see http://redmine_plugin_support.rubyforge.org
+
+NOTE: Change this information in PostInstall.txt 
+You can also delete it if you don't want it.
+
+
