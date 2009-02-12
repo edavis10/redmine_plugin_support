@@ -1,7 +1,4 @@
-require 'rake'
-require 'rake/tasklib'
 require 'rake/rdoctask'
-
 
 module RedminePluginSupport
   class RDocTask < GeneralTask

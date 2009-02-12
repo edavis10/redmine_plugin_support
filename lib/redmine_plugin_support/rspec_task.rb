@@ -1,9 +1,5 @@
-require 'rake'
-require 'rake/tasklib'
-
 gem 'rspec'
 gem 'rspec-rails'
-
 require 'spec/rake/spectask'
 
 module RedminePluginSupport

@@ -1,5 +1,3 @@
-require 'rake'
-require 'rake/tasklib'
 require 'cucumber/rake/task'
 
 module RedminePluginSupport

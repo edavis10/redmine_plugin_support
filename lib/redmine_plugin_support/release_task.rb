@@ -1,6 +1,3 @@
-require 'rake'
-require 'rake/tasklib'
-
 module RedminePluginSupport
   class ReleaseTask < GeneralTask
     def define
