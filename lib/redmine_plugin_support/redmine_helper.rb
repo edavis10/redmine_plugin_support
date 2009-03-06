@@ -1,7 +1,7 @@
 module RedminePluginSupport
   class RedmineHelper
     def self.plugin_root
-      RedminePluginSupport::Base.options[:plugin_root]
+      RedminePluginSupport::Base.instance.plugin_root
     end
 
     def self.redmine_root

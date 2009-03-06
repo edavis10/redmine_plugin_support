@@ -17,16 +17,27 @@ module RedminePluginSupport
   @@options = { }
 
   class Base
-    # :plugin_root => File.expand_path(File.dirname(__FILE__))
-    def self.setup(options = { })
-      @@options = { 
-        :project_name => 'undefined',
-        :tasks => [:doc, :spec, :cucumber, :release, :clean],
-        :plugin_root => '.',
-        :default => :doc
-      }.merge(options)
+    include Singleton
 
-      @@options[:tasks].each do |task|
+    attr_accessor :project_name
+    attr_accessor :tasks
+    attr_accessor :plugin_root
+    attr_accessor :default_task
+
+    attr_accessor :plugin
+  
+
+    # :plugin_root => File.expand_path(File.dirname(__FILE__))
+    def self.setup(options = { }, &block)
+      plugin = self.instance
+      plugin.project_name = 'undefined'
+      plugin.tasks = [:doc, :spec, :cucumber, :release, :clean]
+      plugin.plugin_root = '.'
+      plugin.default_task = :doc
+
+      plugin.instance_eval(&block)
+
+      plugin.tasks.each do |task|
         case task
         when :doc
           RedminePluginSupport::RDocTask.new(:doc)
@@ -38,18 +49,13 @@ module RedminePluginSupport
           RedminePluginSupport::ReleaseTask.new(:release)
         when :clean
           require 'rake/clean'
-          CLEAN.include('**/semantic.cache', "**/#{@@options[:project_name]}.zip", "**/#{@@options[:project_name]}.tar.gz")
+          CLEAN.include('**/semantic.cache', "**/#{plugin.project_name}.zip", "**/#{plugin.project_name}.tar.gz")
         end
       end
       
-      task :default => @@options[:default]
+      task :default => plugin.default_task
 
     end
-    
-    def self.options
-      @@options
-    end
-
   end
 
 end
