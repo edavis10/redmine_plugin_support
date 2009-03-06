@@ -5,15 +5,15 @@ module RedminePluginSupport
     end
 
     def self.redmine_root
-      File.expand_path(File.dirname(__FILE__) + '/../../../')
+      RedminePluginSupport::Base.instance.redmine_root
     end
     
     def self.redmine_app
-      File.expand_path(File.dirname(__FILE__) + '/../../../app')
+      File.expand_path(RedminePluginSupport::Base.instance.redmine_root + '/app')
     end
 
     def self.redmine_lib
-      File.expand_path(File.dirname(__FILE__) + '/../../../lib')
+      File.expand_path(RedminePluginSupport::Base.instance.redmine_root + '/lib')
     end
 
   end
