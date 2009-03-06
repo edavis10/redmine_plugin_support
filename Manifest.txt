@@ -7,6 +7,12 @@ features/development.feature
 features/steps/common.rb
 features/steps/env.rb
 lib/redmine_plugin_support.rb
+lib/redmine_plugin_support/cucumber_task.rb
+lib/redmine_plugin_support/general_task.rb
+lib/redmine_plugin_support/rdoc_task.rb
+lib/redmine_plugin_support/redmine_helper.rb
+lib/redmine_plugin_support/release_task.rb
+lib/redmine_plugin_support/rspec_task.rb
 script/console
 script/destroy
 script/generate
