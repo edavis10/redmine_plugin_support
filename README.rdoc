@@ -1,16 +1,40 @@
-= redmine_plugin_support
+= Redmine Plugin Support
 
-Description goes here.
+This library is a collection of rake tasks and other scripts that will make Redmine plugin development easier.  To use it, just configure it in your plugin's Rakefile:
+
+    require 'redmine_plugin_support'
+    
+    RedminePluginSupport::Base.setup do |plugin|
+      plugin.project_name = 'my_plugin_name'
+      plugin.default_task = [:spec]
+      plugin.tasks = [:doc, :release, :clean, :spec]
+    end
+
+== Configuration options
+
+* project_name - name of your Redmine plugin.  Make sure it matches your name in the init.rb
+* tasks - list of Rake tasks to use.   Valid options are:
+  * :doc - rdoc tasks
+  * :spec
+  * :cucumber
+  * :release - packaging tasks
+  * :clean
+  * :test - Test::Unit tasks
+* plugin_root - the location of your plugin.  Default: '.' which will work fine if you're requiring this gem from a Rakefile.
+* redmine_root - the location of your Redmine root.  Default: the system's REDMINE_ROOT environment or three directories down from your plugin
+* default_task
+
+== Bugs and Feature requests
+
+Bug reports and feature requests are welcome at https://projects.littlestreamsoftware.com/projects/plugin-support-gem.
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
+* Add tests for it. This is important so I don't break it in a future version unintentionally.
 * Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but
-   bump version in a commit by itself I can ignore when I pull)
+  * (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
