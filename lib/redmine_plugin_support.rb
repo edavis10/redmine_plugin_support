@@ -11,6 +11,7 @@ require 'redmine_plugin_support/cucumber_task'
 require 'redmine_plugin_support/rdoc_task'
 require 'redmine_plugin_support/release_task'
 require 'redmine_plugin_support/rspec_task'
+require 'redmine_plugin_support/stats_task'
 require 'redmine_plugin_support/test_unit_task'
 
 module RedminePluginSupport
@@ -34,7 +35,7 @@ module RedminePluginSupport
     def self.setup(options = { }, &block)
       plugin = self.instance
       plugin.project_name = 'undefined'
-      plugin.tasks = [:doc, :spec, :cucumber, :release, :clean, :test]
+      plugin.tasks = [:doc, :spec, :cucumber, :release, :clean, :test, :stats]
       plugin.plugin_root = '.'
       plugin.redmine_root = ENV["REDMINE_ROOT"] || File.expand_path(File.dirname(__FILE__) + '/../../../')
       plugin.default_task = :doc
@@ -55,6 +56,8 @@ module RedminePluginSupport
           RedminePluginSupport::CucumberTask.new(:features)
         when :release
           RedminePluginSupport::ReleaseTask.new(:release)
+        when :stats
+          RedminePluginSupport::StatsTask.new(:stats)
         when :clean
           require 'rake/clean'
           CLEAN.include('**/semantic.cache', "**/#{plugin.project_name}.zip", "**/#{plugin.project_name}.tar.gz")
