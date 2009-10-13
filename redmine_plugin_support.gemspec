@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "lib/redmine_plugin_support/redmine_helper.rb",
      "lib/redmine_plugin_support/release_task.rb",
      "lib/redmine_plugin_support/rspec_task.rb",
+     "lib/redmine_plugin_support/stats_task.rb",
      "lib/redmine_plugin_support/test_unit_task.rb",
      "redmine_plugin_support.gemspec",
      "script/console",
