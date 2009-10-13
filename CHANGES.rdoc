@@ -1,0 +1,22 @@
+== NEXT
+
+* Added: support for code statistics tasks
+
+== 0.0.3
+
+* Feature: MIT License
+* Feature: use jeweler to package instead of newgem
+
+== 0.0.2
+
+* Feature: support for Test::Unit
+* Bug: both zip and tar files can be generated together
+
+== 0.0.1
+
+* First public release
+* Feature: support for rdoc tasks
+* Feature: support for RSpec tasks
+* Feature: support for Cucumber tasks
+* Feature: support for packaging (zip and tar) tasks
+* Feature: ENV['REDMINE_ROOT'] support for running tasks outside of vendor/plugins
