@@ -1,7 +1,22 @@
 module RedminePluginSupport
   class StatsTask < GeneralTask
-    def define
 
+    STATS_DIRECTORIES = [
+                         %w(Controllers        app/controllers),
+                         %w(Helpers            app/helpers), 
+                         %w(Models             app/models),
+                         %w(Libraries          lib/),
+                         %w(APIs               app/apis),
+                         %w(Integration\ tests test/integration),
+                         %w(Functional\ tests  test/functional),
+                         %w(Unit\ tests        test/unit)
+                        ]
+
+    def stats_directories
+      STATS_DIRECTORIES.collect { |name, dir| [ name, "#{RedmineHelper.plugin_root}/#{dir}" ] }.select { |name, dir| File.directory?(dir) }
+    end
+    
+    def define
       namespace :spec do
         task :statsetup do
           require 'code_statistics'
@@ -23,22 +38,11 @@ module RedminePluginSupport
       end
 
 
-      STATS_DIRECTORIES = [
-                           %w(Controllers        app/controllers),
-                           %w(Helpers            app/helpers), 
-                           %w(Models             app/models),
-                           %w(Libraries          lib/),
-                           %w(APIs               app/apis),
-                           %w(Integration\ tests test/integration),
-                           %w(Functional\ tests  test/functional),
-                           %w(Unit\ tests        test/unit)
-
-                          ].collect { |name, dir| [ name, "#{RedmineHelper.plugin_root}/#{dir}" ] }.select { |name, dir| File.directory?(dir) }
 
       desc "Report code statistics (KLOCs, etc) from the application"
       task :stats do
         require 'code_statistics'
-        CodeStatistics.new(*STATS_DIRECTORIES).to_s
+        CodeStatistics.new(*stats_directories).to_s
       end
       
       self
