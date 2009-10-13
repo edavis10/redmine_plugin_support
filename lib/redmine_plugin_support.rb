@@ -6,6 +6,7 @@ require 'rake/tasklib'
  
 require 'redmine_plugin_support/redmine_helper'
 require 'redmine_plugin_support/general_task'
+require 'redmine_plugin_support/environment_task'
 require 'redmine_plugin_support/cucumber_task'
 require 'redmine_plugin_support/rdoc_task'
 require 'redmine_plugin_support/release_task'
