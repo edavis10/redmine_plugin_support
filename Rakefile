@@ -1,28 +1,81 @@
-%w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
-require File.dirname(__FILE__) + '/lib/redmine_plugin_support'
+require 'rubygems'
+require 'rake'
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('redmine_plugin_support', RedminePluginSupport::VERSION) do |p|
-  p.developer('Eric Davis', 'edavis@littlestreamsoftware.com')
-  p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-  p.post_install_message = 'PostInstall.txt'
-  p.rubyforge_name       = p.name # TODO this is default value
-  # p.extra_deps         = [
-  #   ['activesupport','>= 2.0.2'],
-  # ]
-  p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"]
-  ]
-  
-  p.clean_globs |= %w[**/.DS_Store tmp *.log]
-  path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
-  p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
-  p.rsync_args = '-av --delete --ignore-errors'
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "redmine_plugin_support"
+    gem.summary = %Q{Libraries to automate the creation and management of Redmine plugins}
+    gem.description = %Q{This libarary is a collection of rake tasks and other scripts that will make Redmine plugin development easier.}
+    gem.email = "edavis@littlestreamsoftware.com"
+    gem.homepage = "http://github.com/edavis10/redmine_plugin_support"
+    gem.authors = ["Eric Davis"]
+    gem.add_development_dependency "thoughtbot-shoulda"
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+  end
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
 
-require 'newgem/tasks' # load /tasks/*.rake
-Dir['tasks/**/*.rake'].each { |t| load t }
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/*_test.rb'
+  test.verbose = true
+end
 
-# TODO - want other tests/tasks run by default? Add them to the list
-# task :default => [:spec, :features]
+begin
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |test|
+    test.libs << 'test'
+    test.pattern = 'test/**/*_test.rb'
+    test.verbose = true
+  end
+rescue LoadError
+  task :rcov do
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  end
+end
+
+task :test => :check_dependencies
+
+begin
+  require 'reek/rake_task'
+  Reek::RakeTask.new do |t|
+    t.fail_on_error = true
+    t.verbose = false
+    t.source_files = 'lib/**/*.rb'
+  end
+rescue LoadError
+  task :reek do
+    abort "Reek is not available. In order to run reek, you must: sudo gem install reek"
+  end
+end
+
+begin
+  require 'roodi'
+  require 'roodi_task'
+  RoodiTask.new do |t|
+    t.verbose = false
+  end
+rescue LoadError
+  task :roodi do
+    abort "Roodi is not available. In order to run roodi, you must: sudo gem install roodi"
+  end
+end
+
+task :default => :test
+
+require 'rake/rdoctask'
+Rake::RDocTask.new do |rdoc|
+  if File.exist?('VERSION')
+    version = File.read('VERSION')
+  else
+    version = ""
+  end
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "redmine_plugin_support #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
