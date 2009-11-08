@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Eric Davis"]
-  s.date = %q{2009-10-13}
+  s.date = %q{2009-11-07}
   s.description = %q{This libarary is a collection of rake tasks and other scripts that will make Redmine plugin development easier.}
   s.email = %q{edavis@littlestreamsoftware.com}
   s.extra_rdoc_files = [
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+     "CHANGES.rdoc",
      "History.txt",
      "LICENSE",
      "Manifest.txt",
@@ -27,6 +28,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/redmine_plugin_support.rb",
      "lib/redmine_plugin_support/cucumber_task.rb",
+     "lib/redmine_plugin_support/database_task.rb",
      "lib/redmine_plugin_support/environment_task.rb",
      "lib/redmine_plugin_support/general_task.rb",
      "lib/redmine_plugin_support/rdoc_task.rb",
@@ -50,8 +52,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Libraries to automate the creation and management of Redmine plugins}
   s.test_files = [
-    "test/redmine_plugin_support_test.rb",
-     "test/test_helper.rb"
+    "test/test_helper.rb",
+     "test/redmine_plugin_support_test.rb"
   ]
 
   if s.respond_to? :specification_version then
