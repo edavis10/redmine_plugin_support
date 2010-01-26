@@ -12,6 +12,14 @@ begin
     gem.authors = ["Eric Davis"]
     gem.add_development_dependency "thoughtbot-shoulda"
     gem.rubyforge_project = "redmine_plugin_support" # TODO
+    gem.files =  FileList[
+                          "[A-Z]*",
+                          "init.rb",
+                          "rails/init.rb",
+                          "{bin,generators,lib,test,app,assets,config,lang}/**/*",
+                          'lib/jeweler/templates/.gitignore'
+                         ]
+
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

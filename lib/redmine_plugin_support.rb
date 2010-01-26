@@ -9,6 +9,7 @@ require 'redmine_plugin_support/general_task'
 require 'redmine_plugin_support/environment_task'
 require 'redmine_plugin_support/database_task'
 require 'redmine_plugin_support/cucumber_task'
+require 'redmine_plugin_support/metrics_task'
 require 'redmine_plugin_support/rdoc_task'
 require 'redmine_plugin_support/release_task'
 require 'redmine_plugin_support/rspec_task'
@@ -61,6 +62,8 @@ module RedminePluginSupport
           RedminePluginSupport::ReleaseTask.new(:release)
         when :stats
           RedminePluginSupport::StatsTask.new(:stats)
+        when :metrics
+          RedminePluginSupport::MetricsTask.new(:metrics)
         when :clean
           require 'rake/clean'
           CLEAN.include('**/semantic.cache', "**/#{plugin.project_name}.zip", "**/#{plugin.project_name}.tar.gz")
