@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{redmine_plugin_support}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Eric Davis"]
-  s.date = %q{2010-01-25}
+  s.date = %q{2010-05-10}
   s.description = %q{This libarary is a collection of rake tasks and other scripts that will make Redmine plugin development easier.}
   s.email = %q{edavis@littlestreamsoftware.com}
   s.extra_rdoc_files = [
@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{redmine_plugin_support}
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Libraries to automate the creation and management of Redmine plugins}
   s.test_files = [
     "test/test_helper.rb",
