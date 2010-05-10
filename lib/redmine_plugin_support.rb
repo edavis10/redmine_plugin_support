@@ -17,7 +17,7 @@ require 'redmine_plugin_support/stats_task'
 require 'redmine_plugin_support/test_unit_task'
 
 module RedminePluginSupport
-  VERSION = '0.0.2'
+  VERSION = '0.0.4'
 
   @@options = { }
 
